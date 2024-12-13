@@ -1,4 +1,4 @@
-pkgname=noise-suppression-for-voice
+pkgname=noise-suppression-for-voice-big
 pkgver=1.03
 pkgrel=1
 pkgdesc='A real-time noise suppression plugin for voice, version with only one file to use in biglinux noise reduction'
