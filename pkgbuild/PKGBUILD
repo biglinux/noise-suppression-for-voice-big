@@ -18,7 +18,7 @@ source=("https://github.com/werman/noise-suppression-for-voice/archive/refs/tags
 sha256sums=('8c85cae3ebbb3a18facc38930a3b67ca90e3ad609526a0018c71690de35baf04')
 
 build() {
-  cmake -B build -S $pkgname-$pkgver \
+  cmake -B build -S noise-suppression-for-voice-$pkgver \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None
   cmake --build build
