@@ -1,0 +1,34 @@
+pkgname=noise-suppression-for-voice
+pkgver=1.03
+pkgrel=1
+pkgdesc='A real-time noise suppression plugin for voice, version with only one file to use in biglinux noise reduction'
+arch=(x86_64)
+url='https://github.com/werman/noise-suppression-for-voice'
+license=(GPL-3.0-only)
+depends=(freetype2
+         gcc-libs
+         glibc)
+makedepends=(cmake
+             git
+             libx11
+             libxcursor
+             libxinerama
+             libxrandr)
+source=("https://github.com/werman/noise-suppression-for-voice/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('8c85cae3ebbb3a18facc38930a3b67ca90e3ad609526a0018c71690de35baf04')
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=None
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  cd "$pkgdir"
+  rm -R usr/lib/lv2/
+  rm -R usr/lib/lxvst/
+  rm -R usr/lib/vst3/
+  mv usr/lib/ladspa/librnnoise_ladspa.so usr/lib/ladspa/librnnoise_ladspa_big.so
+}
